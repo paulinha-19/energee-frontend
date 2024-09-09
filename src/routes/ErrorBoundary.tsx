@@ -10,11 +10,11 @@ export default function ErrorBoundary() {
 
   if (isRouteErrorResponse(error)) {
     if (error.status === 404) {
-      return <Alert color="error">Error 404 - This page doesn&apos;t exist!</Alert>;
+      return <Alert color="error">Error 404 - Essa página não existe!</Alert>;
     }
 
     if (error.status === 401) {
-      return <Alert color="error">Error 401 - You aren&apos;t authorized to see this</Alert>;
+      return <Alert color="error">Error 401 - Você não está autorizado a acessar esse recurso!</Alert>;
     }
 
     if (error.status === 503) {
@@ -22,7 +22,7 @@ export default function ErrorBoundary() {
     }
 
     if (error.status === 418) {
-      return <Alert color="error">Error 418 - Contact administrator</Alert>;
+      return <Alert color="error">Error 418 - Entre em contato com o administrador</Alert>;
     }
   }
 

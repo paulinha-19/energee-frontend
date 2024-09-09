@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import axiosServices from 'utils/axios';
 import { InfoUser } from 'interfaces';
 import { getUserData } from 'services';
+import { enqueueSnackbar } from 'notistack';
 
 type JWTContextType = {
   isLoggedIn: boolean;
@@ -43,8 +44,16 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
       setUser(userData);
       setIsLoggedIn(true);
       window.location.href = '/dashboard';
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login failed:', error);
+      enqueueSnackbar(error.response.data.detail || "Falha ao realizar o login", {
+        variant: 'error',
+        autoHideDuration: 3000,
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'right'
+        }
+      });
       throw error;
     }
   };
