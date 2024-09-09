@@ -68,6 +68,19 @@ export default function UserList() {
     }
   };
 
+  const typeUser = () => {
+    switch (user?.role) {
+      case 'AD':
+        return 'Administrador';
+      case 'CL':
+        return 'Cliente';
+      case 'GE':
+        return 'Gerador';
+      default:
+        return '';
+    }
+  };
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -106,7 +119,7 @@ export default function UserList() {
           <ListItemAvatar>
             <Avatar alt="Avatar" src={avatar1} sx={{ ...(drawerOpen && { width: 46, height: 46 }) }} />
           </ListItemAvatar>
-          <ListItemText primary={user?.name} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary="UI/UX Designer" />
+          <ListItemText primary={user?.nome} sx={{ ...(!drawerOpen && { display: 'none' }) }} secondary={typeUser()} />
         </ListItem>
       </List>
       <Menu
@@ -118,13 +131,13 @@ export default function UserList() {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem component={Link} to="/apps/profiles/user/personal" onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>Sair</MenuItem>
+        {/* <MenuItem component={Link} to="/apps/profiles/user/personal" onClick={handleClose}>
           Profile
         </MenuItem>
         <MenuItem component={Link} to="/apps/profiles/account/basic" onClick={handleClose}>
           My account
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </Box>
   );

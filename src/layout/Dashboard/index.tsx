@@ -66,7 +66,6 @@ export default function MainLayout() {
           >
             <Breadcrumbs />
             <Outlet />
-            <Footer />
           </Container>
         </Box>
         <AddCustomer />

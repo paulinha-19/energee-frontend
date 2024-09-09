@@ -71,7 +71,7 @@ export default function Customization() {
           borderBottomLeftRadius: '50%',
           borderTopRightRadius: '4px',
           borderBottomRightRadius: '4px',
-          top: '14%',
+          top: '1%',
           position: 'fixed',
           right: 0,
           zIndex: 1200,
@@ -107,12 +107,12 @@ export default function Customization() {
       >
         {open && (
           <MainCard content={false} border={false}>
-            <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.5} sx={{ p: 2.5 }}>
+            {/* <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1.5} sx={{ p: 2.5 }}>
               <Typography variant="h5">Settings</Typography>
               <IconButton color="error" sx={{ p: 0 }} onClick={handleToggle}>
                 <Add size={28} style={{ transform: 'rotate(45deg)' }} />
               </IconButton>
-            </Stack>
+            </Stack> */}
             <SimpleBar
               sx={{
                 '& .simplebar-content': {
@@ -127,10 +127,10 @@ export default function Customization() {
                   <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
-                        Theme Mode
+                        Tema
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        Choose light or dark mode
+                        Escolha light ou dark mode
                       </Typography>
                     </Stack>
                   </Grid>
@@ -142,7 +142,7 @@ export default function Customization() {
                   </Grid>
 
                   {/* theme-contrast */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Theme Contrast
@@ -157,10 +157,10 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* custom-theme */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Custom Theme
@@ -175,10 +175,10 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* menu-caption */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Sidebar Caption
@@ -193,10 +193,10 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* theme-layout */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Theme Layout
@@ -211,10 +211,10 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* theme-orientation */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Menu Orientation
@@ -229,10 +229,10 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* theme-container */}
-                  <Grid item xs={12}>
+                  {/* <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
                         Layout Width
@@ -247,24 +247,21 @@ export default function Customization() {
                   </Grid>
                   <Grid item xs={12}>
                     <Divider />
-                  </Grid>
+                  </Grid> */}
 
                   {/* theme-font-family */}
                   <Grid item xs={12}>
                     <Stack>
                       <Typography variant="subtitle1" color="text.primary">
-                        Font Family
+                        Fonte
                       </Typography>
                       <Typography variant="caption" color="text.secondary">
-                        Choose your font family.
+                        Escolha o tipo de fonte
                       </Typography>
                     </Stack>
                   </Grid>
                   <Grid item xs={12}>
                     {themeFont}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Divider />
                   </Grid>
                 </Grid>
               </Box>

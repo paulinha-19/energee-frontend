@@ -14,6 +14,13 @@ import { loader as productsLoader, productLoader } from 'api/products';
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/default')));
 const DashboardAnalytics = Loadable(lazy(() => import('pages/dashboard/analytics')));
 
+// render - energee
+const Clients = Loadable(lazy(() => import('pages/clientes/index')));
+const Distribuidoras = Loadable(lazy(() => import('pages/distribuidoras/index')));
+const Generator = Loadable(lazy(() => import('pages/geradores/index')));
+const Plants = Loadable(lazy(() => import('pages/usinas/index')));
+const ConsumerUnit = Loadable(lazy(() => import('pages/unidade-consumidora/index')));
+
 // render - widget
 const WidgetStatistics = Loadable(lazy(() => import('pages/widget/statistics')));
 const WidgetData = Loadable(lazy(() => import('pages/widget/data')));
@@ -135,8 +142,6 @@ const PricingPage2 = Loadable(lazy(() => import('pages/extra-pages/price/price2'
 
 // ==============================|| MAIN ROUTES ||============================== //
 
-import ProtectedRoute from './ProtectedRouter';
-
 const MainRoutes = {
   path: '/',
   children: [
@@ -148,7 +153,7 @@ const MainRoutes = {
           path: 'dashboard',
           children: [
             {
-              path: 'default',
+              path: '',
               element: <DashboardDefault />
             },
             {
@@ -158,397 +163,435 @@ const MainRoutes = {
           ]
         },
         {
-          path: 'widget',
+          path: '/',
           children: [
             {
-              path: 'statistics',
-              element: <WidgetStatistics />
+              path: 'clientes',
+              element: <Clients />
             },
             {
-              path: 'data',
-              element: <WidgetData />
+              path: 'distribuidoras',
+              element: <Distribuidoras />
             },
             {
-              path: 'chart',
-              element: <WidgetChart />
+              path: 'geradores',
+              element: <Generator />
+            },
+            {
+              path: 'usinas',
+              element: <Plants />
+            },
+            {
+              path: 'unidades-consumidoras',
+              element: <ConsumerUnit />
             }
           ]
         },
-        {
-          path: 'apps',
-          children: [
-            {
-              path: 'chat',
-              element: <AppChat />
-            },
-            {
-              path: 'calendar',
-              element: <AppCalendar />
-            },
-            {
-              path: 'kanban',
-              element: <AppKanban />,
-              children: [
-                {
-                  path: 'backlogs',
-                  element: <AppKanbanBacklogs />
-                },
-                {
-                  path: 'board',
-                  element: <AppKanbanBoard />
-                }
-              ]
-            },
-            {
-              path: 'customer',
-              children: [
-                {
-                  path: 'customer-list',
-                  element: <AppCustomerList />
-                },
-                {
-                  path: 'customer-card',
-                  element: <AppCustomerCard />
-                }
-              ]
-            },
-            {
-              path: 'invoice',
-              children: [
-                {
-                  path: 'dashboard',
-                  element: <AppInvoiceDashboard />
-                },
-                {
-                  path: 'create',
-                  element: <AppInvoiceCreate />
-                },
-                {
-                  path: 'details/:id',
-                  element: <AppInvoiceDetails />
-                },
-                {
-                  path: 'edit/:id',
-                  element: <AppInvoiceEdit />
-                },
-                {
-                  path: 'list',
-                  element: <AppInvoiceList />
-                }
-              ]
-            },
-            {
-              path: 'profiles',
-              children: [
-                {
-                  path: 'account',
-                  element: <AccountProfile />,
-                  children: [
-                    {
-                      path: 'basic',
-                      element: <AccountTabProfile />
-                    },
-                    {
-                      path: 'personal',
-                      element: <AccountTabPersonal />
-                    },
-                    {
-                      path: 'my-account',
-                      element: <AccountTabAccount />
-                    },
-                    {
-                      path: 'password',
-                      element: <AccountTabPassword />
-                    },
-                    {
-                      path: 'role',
-                      element: <AccountTabRole />
-                    },
-                    {
-                      path: 'settings',
-                      element: <AccountTabSettings />
-                    }
-                  ]
-                },
-                {
-                  path: 'user',
-                  element: <UserProfile />,
-                  children: [
-                    {
-                      path: 'personal',
-                      element: <UserTabPersonal />
-                    },
-                    {
-                      path: 'payment',
-                      element: <UserTabPayment />
-                    },
-                    {
-                      path: 'password',
-                      element: <UserTabPassword />
-                    },
-                    {
-                      path: 'settings',
-                      element: <UserTabSettings />
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              path: 'e-commerce',
-              children: [
-                {
-                  path: 'products',
-                  element: <AppECommProducts />,
-                  loader: productsLoader,
-                  errorElement: <ErrorBoundary />
-                },
-                {
-                  path: 'product-details/:id',
-                  element: <AppECommProductDetails />,
-                  loader: productLoader,
-                  errorElement: <ErrorBoundary />
-                },
-                {
-                  path: 'product-list',
-                  element: <AppECommProductList />,
-                  loader: productsLoader,
-                  errorElement: <ErrorBoundary />
-                },
-                {
-                  path: 'add-new-product',
-                  element: <AppECommAddProduct />
-                },
-                {
-                  path: 'checkout',
-                  element: <AppECommCheckout />
-                }
-              ]
-            }
-          ]
-        },
-        {
-          path: 'forms',
-          children: [
-            {
-              path: 'validation',
-              element: <FormsValidation />
-            },
-            {
-              path: 'wizard',
-              element: <FormsWizard />
-            },
-            {
-              path: 'layout',
-              children: [
-                {
-                  path: 'basic',
-                  element: <FormsLayoutBasic />
-                },
-                {
-                  path: 'multi-column',
-                  element: <FormsLayoutMultiColumn />
-                },
-                {
-                  path: 'action-bar',
-                  element: <FormsLayoutActionBar />
-                },
-                {
-                  path: 'sticky-bar',
-                  element: <FormsLayoutStickyBar />
-                }
-              ]
-            },
-            {
-              path: 'plugins',
-              children: [
-                {
-                  path: 'mask',
-                  element: <FormsPluginsMask />
-                },
-                {
-                  path: 'clipboard',
-                  element: <FormsPluginsClipboard />
-                },
-                {
-                  path: 're-captcha',
-                  element: <FormsPluginsRecaptcha />
-                },
-                {
-                  path: 'editor',
-                  element: <FormsPluginsEditor />
-                },
-                {
-                  path: 'dropzone',
-                  element: <FormsPluginsDropzone />
-                }
-              ]
-            }
-          ]
-        },
-        {
-          path: 'tables',
-          children: [
-            {
-              path: 'react-table',
-              children: [
-                {
-                  path: 'basic',
-                  element: <ReactTableBasic />
-                },
-                {
-                  path: 'dense',
-                  element: <ReactDenseTable />
-                },
-                {
-                  path: 'sorting',
-                  element: <ReactTableSorting />
-                },
-                {
-                  path: 'filtering',
-                  element: <ReactTableFiltering />
-                },
-                {
-                  path: 'grouping',
-                  element: <ReactTableGrouping />
-                },
-                {
-                  path: 'pagination',
-                  element: <ReactTablePagination />
-                },
-                {
-                  path: 'row-selection',
-                  element: <ReactTableRowSelection />
-                },
-                {
-                  path: 'expanding',
-                  element: <ReactTableExpanding />
-                },
-                {
-                  path: 'editable',
-                  element: <ReactTableEditable />
-                },
-                {
-                  path: 'drag-drop',
-                  element: <ReactTableDragDrop />
-                },
-                {
-                  path: 'column-visibility',
-                  element: <ReactTableColumnVisibility />
-                },
-                {
-                  path: 'column-resizing',
-                  element: <ReactTableColumnResizing />
-                },
-                {
-                  path: 'sticky-table',
-                  element: <ReactTableStickyTable />
-                },
-                {
-                  path: 'umbrella',
-                  element: <ReactTableUmbrella />
-                },
-                {
-                  path: 'empty',
-                  element: <ReactTableEmpty />
-                },
-                {
-                  path: 'virtualized',
-                  element: <ReactTableVirtualized />
-                }
-              ]
-            },
-            {
-              path: 'mui-table',
-              children: [
-                {
-                  path: 'basic',
-                  element: <MuiTableBasic />
-                },
-                {
-                  path: 'dense',
-                  element: <MuiTableDense />
-                },
-                {
-                  path: 'enhanced',
-                  element: <MuiTableEnhanced />
-                },
-                {
-                  path: 'datatable',
-                  element: <MuiTableDatatable />
-                },
-                {
-                  path: 'custom',
-                  element: <MuiTableCustom />
-                },
-                {
-                  path: 'fixed-header',
-                  element: <MuiTableFixedHeader />
-                },
-                {
-                  path: 'collapse',
-                  element: <MuiTableCollapse />
-                }
-              ]
-            }
-          ]
-        },
-        {
-          path: 'charts',
-          children: [
-            {
-              path: 'apexchart',
-              element: <ChartApexchart />
-            },
-            {
-              path: 'org-chart',
-              element: <ChartOrganization />
-            }
-          ]
-        },
-        {
-          path: 'map',
-          element: <Map />
-        },
-        {
-          path: 'sample-page',
-          element: <SamplePage />
-        },
-        {
-          path: 'price',
-          children: [
-            {
-              path: 'price1',
-              element: <PricingPage />
-            },
-            {
-              path: 'price2',
-              element: <PricingPage2 />
-            }
-          ]
-        }
+        // {
+        //   path: 'widget',
+        //   children: [
+        //     {
+        //       path: 'statistics',
+        //       element: <WidgetStatistics />
+        //     },
+        //     {
+        //       path: 'data',
+        //       element: <WidgetData />
+        //     },
+        //     {
+        //       path: 'chart',
+        //       element: <WidgetChart />
+        //     }
+        //   ]
+        // },
+
+        // {
+        //   path: 'apps',
+        //   children: [
+        //     {
+        //       path: 'chat',
+        //       element: <AppChat />
+        //     },
+        //     {
+        //       path: 'calendar',
+        //       element: <AppCalendar />
+        //     },
+        //     {
+        //       path: 'kanban',
+        //       element: <AppKanban />,
+        //       children: [
+        //         {
+        //           path: 'backlogs',
+        //           element: <AppKanbanBacklogs />
+        //         },
+        //         {
+        //           path: 'board',
+        //           element: <AppKanbanBoard />
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'customer',
+        //       children: [
+        //         {
+        //           path: 'customer-list',
+        //           element: <AppCustomerList />
+        //         },
+        //         {
+        //           path: 'customer-card',
+        //           element: <AppCustomerCard />
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'invoice',
+        //       children: [
+        //         {
+        //           path: 'dashboard',
+        //           element: <AppInvoiceDashboard />
+        //         },
+        //         {
+        //           path: 'create',
+        //           element: <AppInvoiceCreate />
+        //         },
+        //         {
+        //           path: 'details/:id',
+        //           element: <AppInvoiceDetails />
+        //         },
+        //         {
+        //           path: 'edit/:id',
+        //           element: <AppInvoiceEdit />
+        //         },
+        //         {
+        //           path: 'list',
+        //           element: <AppInvoiceList />
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'profiles',
+        //       children: [
+        //         {
+        //           path: 'account',
+        //           element: <AccountProfile />,
+        //           children: [
+        //             {
+        //               path: 'basic',
+        //               element: <AccountTabProfile />
+        //             },
+        //             {
+        //               path: 'personal',
+        //               element: <AccountTabPersonal />
+        //             },
+        //             {
+        //               path: 'my-account',
+        //               element: <AccountTabAccount />
+        //             },
+        //             {
+        //               path: 'password',
+        //               element: <AccountTabPassword />
+        //             },
+        //             {
+        //               path: 'role',
+        //               element: <AccountTabRole />
+        //             },
+        //             {
+        //               path: 'settings',
+        //               element: <AccountTabSettings />
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           path: 'user',
+        //           element: <UserProfile />,
+        //           children: [
+        //             {
+        //               path: 'personal',
+        //               element: <UserTabPersonal />
+        //             },
+        //             {
+        //               path: 'payment',
+        //               element: <UserTabPayment />
+        //             },
+        //             {
+        //               path: 'password',
+        //               element: <UserTabPassword />
+        //             },
+        //             {
+        //               path: 'settings',
+        //               element: <UserTabSettings />
+        //             }
+        //           ]
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'e-commerce',
+        //       children: [
+        //         {
+        //           path: 'products',
+        //           element: <AppECommProducts />,
+        //           loader: productsLoader,
+        //           errorElement: <ErrorBoundary />
+        //         },
+        //         {
+        //           path: 'product-details/:id',
+        //           element: <AppECommProductDetails />,
+        //           loader: productLoader,
+        //           errorElement: <ErrorBoundary />
+        //         },
+        //         {
+        //           path: 'product-list',
+        //           element: <AppECommProductList />,
+        //           loader: productsLoader,
+        //           errorElement: <ErrorBoundary />
+        //         },
+        //         {
+        //           path: 'add-new-product',
+        //           element: <AppECommAddProduct />
+        //         },
+        //         {
+        //           path: 'checkout',
+        //           element: <AppECommCheckout />
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+
+
+        // {
+        //   path: 'forms',
+        //   children: [
+        //     {
+        //       path: 'validation',
+        //       element: <FormsValidation />
+        //     },
+        //     {
+        //       path: 'wizard',
+        //       element: <FormsWizard />
+        //     },
+        //     {
+        //       path: 'layout',
+        //       children: [
+        //         {
+        //           path: 'basic',
+        //           element: <FormsLayoutBasic />
+        //         },
+        //         {
+        //           path: 'multi-column',
+        //           element: <FormsLayoutMultiColumn />
+        //         },
+        //         {
+        //           path: 'action-bar',
+        //           element: <FormsLayoutActionBar />
+        //         },
+        //         {
+        //           path: 'sticky-bar',
+        //           element: <FormsLayoutStickyBar />
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'plugins',
+        //       children: [
+        //         {
+        //           path: 'mask',
+        //           element: <FormsPluginsMask />
+        //         },
+        //         {
+        //           path: 'clipboard',
+        //           element: <FormsPluginsClipboard />
+        //         },
+        //         {
+        //           path: 're-captcha',
+        //           element: <FormsPluginsRecaptcha />
+        //         },
+        //         {
+        //           path: 'editor',
+        //           element: <FormsPluginsEditor />
+        //         },
+        //         {
+        //           path: 'dropzone',
+        //           element: <FormsPluginsDropzone />
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+
+
+        // {
+        //   path: 'tables',
+        //   children: [
+        //     {
+        //       path: 'react-table',
+        //       children: [
+        //         {
+        //           path: 'basic',
+        //           element: <ReactTableBasic />
+        //         },
+        //         {
+        //           path: 'dense',
+        //           element: <ReactDenseTable />
+        //         },
+        //         {
+        //           path: 'sorting',
+        //           element: <ReactTableSorting />
+        //         },
+        //         {
+        //           path: 'filtering',
+        //           element: <ReactTableFiltering />
+        //         },
+        //         {
+        //           path: 'grouping',
+        //           element: <ReactTableGrouping />
+        //         },
+        //         {
+        //           path: 'pagination',
+        //           element: <ReactTablePagination />
+        //         },
+        //         {
+        //           path: 'row-selection',
+        //           element: <ReactTableRowSelection />
+        //         },
+        //         {
+        //           path: 'expanding',
+        //           element: <ReactTableExpanding />
+        //         },
+        //         {
+        //           path: 'editable',
+        //           element: <ReactTableEditable />
+        //         },
+        //         {
+        //           path: 'drag-drop',
+        //           element: <ReactTableDragDrop />
+        //         },
+        //         {
+        //           path: 'column-visibility',
+        //           element: <ReactTableColumnVisibility />
+        //         },
+        //         {
+        //           path: 'column-resizing',
+        //           element: <ReactTableColumnResizing />
+        //         },
+        //         {
+        //           path: 'sticky-table',
+        //           element: <ReactTableStickyTable />
+        //         },
+        //         {
+        //           path: 'umbrella',
+        //           element: <ReactTableUmbrella />
+        //         },
+        //         {
+        //           path: 'empty',
+        //           element: <ReactTableEmpty />
+        //         },
+        //         {
+        //           path: 'virtualized',
+        //           element: <ReactTableVirtualized />
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: 'mui-table',
+        //       children: [
+        //         {
+        //           path: 'basic',
+        //           element: <MuiTableBasic />
+        //         },
+        //         {
+        //           path: 'dense',
+        //           element: <MuiTableDense />
+        //         },
+        //         {
+        //           path: 'enhanced',
+        //           element: <MuiTableEnhanced />
+        //         },
+        //         {
+        //           path: 'datatable',
+        //           element: <MuiTableDatatable />
+        //         },
+        //         {
+        //           path: 'custom',
+        //           element: <MuiTableCustom />
+        //         },
+        //         {
+        //           path: 'fixed-header',
+        //           element: <MuiTableFixedHeader />
+        //         },
+        //         {
+        //           path: 'collapse',
+        //           element: <MuiTableCollapse />
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+
+        // {
+        //   path: 'charts',
+        //   children: [
+        //     {
+        //       path: 'apexchart',
+        //       element: <ChartApexchart />
+        //     },
+        //     {
+        //       path: 'org-chart',
+        //       element: <ChartOrganization />
+        //     }
+        //   ]
+        // },
+
+
+        // {
+        //   path: 'map',
+        //   element: <Map />
+        // },
+        // {
+        //   path: 'sample-page',
+        //   element: <SamplePage />
+        // },
+
+        // {
+        //   path: 'price',
+        //   children: [
+        //     {
+        //       path: 'price1',
+        //       element: <PricingPage />
+        //     },
+        //     {
+        //       path: 'price2',
+        //       element: <PricingPage2 />
+        //     }
+        //   ]
+        // }
       ]
     },
-    {
-      path: '/',
-      element: <SimpleLayout layout={SimpleLayoutType.LANDING} />,
-      children: [
-        {
-          path: 'landing',
-          element: <Landing />
-        }
-      ]
-    },
-    {
-      path: '/',
-      element: <SimpleLayout layout={SimpleLayoutType.SIMPLE} />,
-      children: [
-        {
-          path: 'contact-us',
-          element: <ContactUS />
-        }
-      ]
-    },
+    // {
+    //   path: '/',
+    //   element: <SimpleLayout layout={SimpleLayoutType.LANDING} />,
+    //   children: [
+    //     {
+    //       path: 'landing',
+    //       element: <Landing />
+    //     }
+    //   ]
+    // },
+
+
+    // {
+    //   path: '/',
+    //   element: <SimpleLayout layout={SimpleLayoutType.SIMPLE} />,
+    //   children: [
+    //     {
+    //       path: 'contact-us',
+    //       element: <ContactUS />
+    //     }
+    //   ]
+    // },
+
+
     {
       path: '/maintenance',
       element: <PagesLayout />,
@@ -579,64 +622,66 @@ const MainRoutes = {
         }
       ]
     },
-    {
-      path: '/auth',
-      element: <PagesLayout />,
-      children: [
-        {
-          path: 'login',
-          element: <AuthLogin />
-        },
-        {
-          path: 'register',
-          element: <AuthRegister />
-        },
-        {
-          path: 'forgot-password',
-          element: <AuthForgotPassword />
-        },
-        {
-          path: 'reset-password',
-          element: <AuthResetPassword />
-        },
-        {
-          path: 'check-mail',
-          element: <AuthCheckMail />
-        },
-        {
-          path: 'code-verification',
-          element: <AuthCodeVerification />
-        },
-        {
-          path: 'login2',
-          element: <AuthLogin2 />
-        },
-        {
-          path: 'register2',
-          element: <AuthRegister2 />
-        },
-        {
-          path: 'forgot-password2',
-          element: <AuthForgotPassword2 />
-        },
-        {
-          path: 'reset-password2',
-          element: <AuthResetPassword2 />
-        },
-        {
-          path: 'check-mail2',
-          element: <AuthCheckMail2 />
-        },
-        {
-          path: 'code-verification2',
-          element: <AuthCodeVerification2 />
-        },
-        {
-          path: 'login3',
-          element: <AuthLogin3 />
-        }
-      ]
-    },
+
+
+    // {
+    //   path: '/auth',
+    //   element: <PagesLayout />,
+    //   children: [
+    //     {
+    //       path: 'login',
+    //       element: <AuthLogin />
+    //     },
+    //     {
+    //       path: 'register',
+    //       element: <AuthRegister />
+    //     },
+    //     {
+    //       path: 'forgot-password',
+    //       element: <AuthForgotPassword />
+    //     },
+    //     {
+    //       path: 'reset-password',
+    //       element: <AuthResetPassword />
+    //     },
+    //     {
+    //       path: 'check-mail',
+    //       element: <AuthCheckMail />
+    //     },
+    //     {
+    //       path: 'code-verification',
+    //       element: <AuthCodeVerification />
+    //     },
+    //     {
+    //       path: 'login2',
+    //       element: <AuthLogin2 />
+    //     },
+    //     {
+    //       path: 'register2',
+    //       element: <AuthRegister2 />
+    //     },
+    //     {
+    //       path: 'forgot-password2',
+    //       element: <AuthForgotPassword2 />
+    //     },
+    //     {
+    //       path: 'reset-password2',
+    //       element: <AuthResetPassword2 />
+    //     },
+    //     {
+    //       path: 'check-mail2',
+    //       element: <AuthCheckMail2 />
+    //     },
+    //     {
+    //       path: 'code-verification2',
+    //       element: <AuthCodeVerification2 />
+    //     },
+    //     {
+    //       path: 'login3',
+    //       element: <AuthLogin3 />
+    //     }
+    //   ]
+    // },
     { path: '*', element: <MaintenanceError /> }
   ]
 };
