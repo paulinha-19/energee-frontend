@@ -94,7 +94,7 @@ function ReactTable({ columns, data, title }: ReactTableProps) {
 
   return (
     <MainCard content={false} title={title}>
-      <Box sx={{ p: 3, pb: 0 }}>
+      {/* <Box sx={{ p: 3, pb: 0 }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
           <Typography variant="h5">Products</Typography>
           <Box sx={{ minWidth: 120 }}>
@@ -107,7 +107,7 @@ function ReactTable({ columns, data, title }: ReactTableProps) {
             </FormControl>
           </Box>
         </Stack>
-      </Box>
+      </Box> */}
       <Stack
         direction={matchDownSM ? 'column' : 'row'}
         spacing={2}
@@ -206,7 +206,7 @@ export default function Products() {
   const columns = useMemo<ColumnDef<TableDataProps>[]>(
     () => [
       {
-        header: 'Products',
+        header: 'Nome',
         accessorKey: 'fatherName',
         cell: ({ row }) => {
           return (
@@ -243,12 +243,12 @@ export default function Products() {
         }
       },
       {
-        header: 'Price',
+        header: 'UC',
         accessorKey: 'age',
         cell: ({ row }) => <Typography variant="subtitle1">${row.original.age}</Typography>
       },
       {
-        header: 'Sales',
+        header: 'Endereço',
         accessorKey: 'visits',
         cell: ({ row }) => {
           return (
@@ -273,7 +273,20 @@ export default function Products() {
         }
       },
       {
-        header: 'Rating',
+        header: 'Ações',
+        accessorKey: 'progress',
+        cell: ({ row }) => {
+          return (
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <Star1 variant="Bold" color={theme.palette.warning.main} size={18} />
+              <Typography variant="subtitle1">{randomIntFromInterval(1, 10) / 2}</Typography>
+              <Typography color="text.secondary">({row.original.progress})</Typography>
+            </Stack>
+          );
+        }
+      },
+      {
+        header: 'Distribuidoras',
         accessorKey: 'progress',
         cell: ({ row }) => {
           return (

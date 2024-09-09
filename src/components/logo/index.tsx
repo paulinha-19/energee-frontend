@@ -10,6 +10,7 @@ import Logo from './LogoMain';
 import LogoIcon from './LogoIcon';
 import useAuth from 'hooks/useAuth';
 import { APP_DEFAULT_PATH } from 'config';
+import { Box } from '@mui/material';
 
 interface Props {
   isIcon?: boolean;
@@ -23,8 +24,10 @@ export default function LogoSection({ isIcon, sx, to }: Props) {
   const { isLoggedIn } = useAuth();
 
   return (
-    <ButtonBase disableRipple {...(isLoggedIn && { component: Link, to: !to ? APP_DEFAULT_PATH : to, sx })}>
-      {isIcon ? <LogoIcon /> : <Logo />}
-    </ButtonBase>
+    <Box sx={{ display: 'flex', margin: '0 auto' }}>
+      <ButtonBase disableRipple {...(isLoggedIn && { component: Link, to: !to ? APP_DEFAULT_PATH : to, sx })}>
+        {isIcon ? <LogoIcon /> : <Logo />}
+      </ButtonBase>
+    </Box>
   );
 }

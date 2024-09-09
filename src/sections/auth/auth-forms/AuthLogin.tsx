@@ -137,7 +137,7 @@ export default function AuthLogin({ forgot }: { forgot?: string }) {
               </Grid>
               <Grid item xs={12} sx={{ mt: -1 }}>
                 <Divider sx={{ borderColor: '#d5d6d7', marginTop: 2, marginBottom: 0.5 }} />
-                <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
+                {/* <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}>
                   <Link
                     sx={{
                       fontWeight: 500,
@@ -154,7 +154,7 @@ export default function AuthLogin({ forgot }: { forgot?: string }) {
                   >
                     Esqueceu a senha?
                   </Link>
-                </Stack>
+                </Stack> */}
               </Grid>
               {errors.submit && (
                 <Grid item xs={12}>

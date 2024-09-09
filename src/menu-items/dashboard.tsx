@@ -5,45 +5,31 @@ import { FormattedMessage } from 'react-intl';
 import { useGetMenu } from 'api/menu';
 
 // assets
-import { Refresh, Home3, HomeTrendUp, Box1 } from 'iconsax-react';
+import { Refresh, Home3, HomeTrendUp, Box1, Home, Home2} from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
 
 const icons = {
   navigation: Home3,
-  dashboard: HomeTrendUp,
+  dashboard: Home2,
   components: Box1,
   loading: Refresh
 };
 
 const loadingMenu: NavItemType = {
   id: 'group-dashboard-loading',
-  title: <FormattedMessage id="dashboard" />,
+  // title: <FormattedMessage id="dashboard" />,
   type: 'group',
   icon: icons.loading,
   children: [
     {
-      id: 'dashboard1',
-      title: <FormattedMessage id="dashboard" />,
-      type: 'collapse',
-      icon: icons.loading,
-      children: [
-        {
-          id: 'default1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/default',
-          breadcrumbs: false
-        },
-        {
-          id: 'analytics1',
-          title: 'loading',
-          type: 'item',
-          url: '/dashboard/analytics',
-          breadcrumbs: false
-        }
-      ]
+      id: 'dashboard',
+      title: 'Dashboard',
+      type: 'item',
+      url: '/dashboard',
+      breadcrumbs: false,
+      icon: icons.dashboard
     }
   ]
 };
