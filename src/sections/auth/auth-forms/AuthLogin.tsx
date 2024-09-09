@@ -156,11 +156,11 @@ export default function AuthLogin({ forgot }: { forgot?: string }) {
                   </Link>
                 </Stack> */}
               </Grid>
-              {errors.submit && (
+              {/* {errors.submit && (
                 <Grid item xs={12}>
                   <FormHelperText error>{errors.submit}</FormHelperText>
                 </Grid>
-              )}
+              )} */}
             </Grid>
           </form>
         )}
@@ -168,16 +168,3 @@ export default function AuthLogin({ forgot }: { forgot?: string }) {
     </>
   );
 }
-
-
-// const { login } = useAuth();
-
-// const handleSubmit = async (values: { email: string; password: string }) => {
-//   try {
-//     await login(values.email, values.password);
-//     // Redirecionar para o dashboard ou página inicial
-//     navigate('/dashboard');
-//   } catch (err) {
-//     console.error('Erro no login:', err);
-//   }
-// };
