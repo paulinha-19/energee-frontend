@@ -1,35 +1,48 @@
 import React, { createContext, useEffect, useState } from 'react';
-import axios from 'utils/axios';
-import { JWTContextType, UserProfile } from 'types/auth';
+import axiosServices from 'utils/axios';
+import { InfoUser } from 'interfaces';
+import { getUserData } from 'services';
+
+type JWTContextType = {
+  isLoggedIn: boolean;
+  user: InfoUser | null;
+  logout: () => void;
+  login: (email: string, password: string) => Promise<void>;
+};
 
 const JWTContext = createContext<JWTContextType | null>(null);
 
 export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
-  const [user, setUser] = useState<UserProfile | null>(null);
+  const [user, setUser] = useState<InfoUser | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      // Use getUserData to fetch user data
+      getUserData()
+        .then((response) => {
+          setUser(response); // Set the user data
+          console.log("response", response);
+          setIsLoggedIn(true);
+        })
+        .catch(() => {
+          setIsLoggedIn(false);
+          setUser(null);
+        });
     }
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axios.post('usuarios/login/', { email, password });
+      const response = await axiosServices.post('usuarios/login/', { email, password });
       const { access, refresh } = response.data;
-
       localStorage.setItem('accessToken', access);
-      localStorage.setItem('refreshToken', refresh)
-      axios.defaults.headers.common.Authorization = `Bearer ${access}`;
-
+      localStorage.setItem('refreshToken', refresh);
+      const userData = await getUserData(); // Use getUserData to fetch user data after login
+      setUser(userData);
       setIsLoggedIn(true);
-      setUser({ email });
-      window.location.href = "/dashboard";
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login failed:', error);
       throw error;
@@ -41,13 +54,13 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
     localStorage.removeItem('refreshToken');
     setIsLoggedIn(false);
     setUser(null);
-    delete axios.defaults.headers.common.Authorization;
-    window.location.href = "/login";
+    delete axiosServices.defaults.headers.common.Authorization;
+    window.location.href = '/login';
   };
 
   const resetPassword = async (email: string) => {
     try {
-      await axios.post('/auth/users/reset_password/', { email });
+      await axiosServices.post('/auth/users/reset_password/', { email });
       console.log('Password reset email sent');
     } catch (error) {
       console.error('Reset password failed:', error);
@@ -59,11 +72,9 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
     <JWTContext.Provider
       value={{
         isLoggedIn,
-        isInitialized,
         user,
         login,
         logout,
-        resetPassword
       }}
     >
       {children}

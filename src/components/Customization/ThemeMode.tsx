@@ -75,7 +75,7 @@ export default function ThemeModeLayout() {
             </Stack>
           }
         />
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Radio value={ThemeMode.AUTO} sx={{ display: 'none' }} />}
           sx={{ width: '100%', height: 60, m: 0, display: 'flex', '& .MuiFormControlLabel-label': { flex: 1 } }}
           label={
@@ -91,7 +91,7 @@ export default function ThemeModeLayout() {
               <Typography variant="caption">Auto</Typography>
             </Stack>
           }
-        />
+        /> */}
       </Stack>
     </RadioGroup>
   );

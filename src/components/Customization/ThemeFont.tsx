@@ -56,7 +56,7 @@ export default function ThemeFont() {
     <RadioGroup row aria-label="payment-card" name="payment-card" value={fontFamily} onChange={handleFontChange}>
       <Grid container spacing={1.75} sx={{ ml: 0 }}>
         {fonts.map((item, index) => (
-          <Grid item key={index}>
+          <Grid item key={index} xs={6}>
             <FormControlLabel
               control={<Radio value={item.value} sx={{ display: 'none' }} />}
               sx={{ display: 'flex', '& .MuiFormControlLabel-label': { flex: 1 } }}

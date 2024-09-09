@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { Story, Fatrows, PresentionChart } from 'iconsax-react';
+import { Story, Fatrows, PresentionChart, People, Activity } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -12,37 +12,58 @@ const icons = {
   widgets: Story,
   statistics: Story,
   data: Fatrows,
-  chart: PresentionChart
+  chart: PresentionChart,
+  people: People,
+  unity: Activity
 };
 
 // ==============================|| MENU ITEMS - WIDGETS ||============================== //
 
 const widget: NavItemType = {
   id: 'group-widget',
-  title: <FormattedMessage id="widgets" />,
+  // title: <FormattedMessage id="widgets" />,
   icon: icons.widgets,
   type: 'group',
   children: [
     {
-      id: 'statistics',
-      title: <FormattedMessage id="statistics" />,
+      id: 'distributors',
+      title: <FormattedMessage id="Distribuidoras" />,
       type: 'item',
-      url: '/widget/statistics',
-      icon: icons.statistics
+      url: '/distribuidoras',
+      icon: icons.statistics,
+      breadcrumbs: false
     },
     {
       id: 'data',
-      title: <FormattedMessage id="data" />,
+      title: <FormattedMessage id="Clientes" />,
       type: 'item',
-      url: '/widget/data',
-      icon: icons.data
+      url: '/clientes',
+      icon: icons.people,
+      breadcrumbs: false
     },
     {
-      id: 'chart',
-      title: <FormattedMessage id="chart" />,
+      id: 'geradores',
+      title: <FormattedMessage id="Geradores" />,
       type: 'item',
-      url: '/widget/chart',
-      icon: icons.chart
+      url: '/geradores',
+      icon: icons.chart,
+      breadcrumbs: false
+    },
+    {
+      id: 'usinas',
+      title: <FormattedMessage id="Usinas" />,
+      type: 'item',
+      url: '/usinas',
+      icon: icons.data,
+      breadcrumbs: false
+    },
+    {
+      id: 'unidades-consumidoras',
+      title: <FormattedMessage id="Unidades consumidoras" />,
+      type: 'item',
+      url: '/unidades-consumidoras',
+      icon: icons.unity,
+      breadcrumbs: false
     }
   ]
 };
