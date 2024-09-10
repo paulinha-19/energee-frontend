@@ -20,7 +20,6 @@ const Distribuidoras = Loadable(lazy(() => import('pages/distribuidoras/index'))
 const Generator = Loadable(lazy(() => import('pages/geradores/index')));
 const Plants = Loadable(lazy(() => import('pages/usinas/index')));
 const ConsumerUnit = Loadable(lazy(() => import('pages/unidade-consumidora/index')));
-const Reports = Loadable(lazy(() => import('pages/reports/index')));
 const Extraction = Loadable(lazy(() => import('pages/extraction/index')));
 
 // render - widget
