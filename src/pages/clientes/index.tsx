@@ -47,9 +47,9 @@ interface ColumnProps {
 
 const columns: ColumnProps[] = [
   { id: 'nome', label: 'Nome', minWidth: 170 },
-  { id: 'uc', label: 'UC', minWidth: 100 },
-  { id: 'status', label: 'Status', minWidth: 170, align: 'left' },
-  { id: 'actions', label: 'Ações', minWidth: 170, align: 'center' }
+  { id: 'uc', label: 'UC', minWidth: 100, align: 'center' },
+  { id: 'status', label: 'Status', minWidth: 170, align: 'center' },
+  { id: 'actions', label: 'Ações', minWidth: 200, align: 'center' }
 ];
 
 export default function Clients() {
@@ -273,8 +273,8 @@ export default function Clients() {
                 clients.map((row: any) => (
                   <TableRow sx={{ py: 3 }} hover role="checkbox" tabIndex={-1} key={row.id}>
                     <TableCell align="left">{row.nome}</TableCell>
-                    <TableCell align="left">{row.uc}</TableCell>
-                    <TableCell align="left">
+                    <TableCell align="center">{row.uc}</TableCell>
+                    <TableCell align="center">
                       <Chip label={row.status ? 'Ativo' : 'Inativo'} color={row.status ? 'success' : 'error'} variant="outlined" />
                     </TableCell>
                     <TableCell align="center">

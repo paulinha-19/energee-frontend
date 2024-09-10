@@ -35,7 +35,7 @@ import { enqueueSnackbar } from 'notistack';
 const columns: any[] = [
   { id: 'nome', label: 'Nome', minWidth: 170 },
   { id: 'status', label: 'Status', minWidth: 100, align: 'left' },
-  { id: 'actions', label: 'Ações', minWidth: 170, align: 'center' }
+  { id: 'actions', label: 'Ações', minWidth: 200, align: 'center' }
 ];
 
 export default function Distribuitors() {
