@@ -75,6 +75,18 @@ export default function Extraction() {
     }
   };
 
+  const handleSave = () => {
+    setOpenModal(false);
+    enqueueSnackbar('Os valores foram inseridos com sucesso no banco de dados!', {
+      variant: 'info',
+      autoHideDuration: 5000,
+      anchorOrigin: {
+        vertical: 'top',
+        horizontal: 'right'
+      }
+    });
+  };
+
   const handleSubmit = () => {
     if (selectedClient && selectedDistribuidora && selectedDocumento && selectedFile) {
       const formData = new FormData();
@@ -158,7 +170,7 @@ export default function Extraction() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpenModal(false)} color="primary" variant="outlined">
+          <Button onClick={handleSave} color="primary" variant="outlined">
             Salvar
           </Button>
           <Button onClick={() => setOpenModal(false)} color="info" variant="outlined" autoFocus>
