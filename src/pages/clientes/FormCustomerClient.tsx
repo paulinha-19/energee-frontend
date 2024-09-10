@@ -21,6 +21,7 @@ import { AddClientSchema, EditClientSchema } from 'sections/forms/validation/CRU
 import { useSnackbar } from 'notistack';
 import { SetStateAction, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { getErrorDetail } from 'utils/error-detail';
 
 interface FormCustomerAddProps {
   client?: any | null;
@@ -77,14 +78,8 @@ export default function FormCustomerClient({ client, isEditing, distributors, on
           }
         });
       } catch (error: any) {
-        enqueueSnackbar(error?.detail || 'Erro ao enviar os dados do cliente', {
-          variant: 'error',
-          autoHideDuration: 8000,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right'
-          }
-        });
+        console.error(error);
+        getErrorDetail(error);
         setCustomerModal(false);
       } finally {
         setSubmitting(false);
