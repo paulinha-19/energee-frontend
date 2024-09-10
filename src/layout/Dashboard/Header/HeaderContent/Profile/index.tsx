@@ -150,7 +150,7 @@ export default function ProfilePage() {
                         <Stack direction="row" spacing={1.25} alignItems="center">
                           <Avatar alt="profile user" src={avatar1} />
                           <Stack>
-                            <Typography variant="subtitle1">{user?.name}</Typography>
+                            <Typography variant="subtitle1">{user?.nome}</Typography>
                             <Typography variant="body2" color="secondary">
                               UI/UX Designer
                             </Typography>

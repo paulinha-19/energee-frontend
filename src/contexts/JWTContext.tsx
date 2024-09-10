@@ -8,6 +8,8 @@ type JWTContextType = {
   isLoggedIn: boolean;
   user: InfoUser | null;
   logout: () => void;
+  resetPassword: (email: string) => Promise<void>;
+  register: (email: string, password: string, firstName: string, lastName: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
 };
 
@@ -24,7 +26,7 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
       getUserData()
         .then((response) => {
           setUser(response); // Set the user data
-          console.log("response", response);
+          console.log('response', response);
           setIsLoggedIn(true);
         })
         .catch(() => {
@@ -46,7 +48,7 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
       window.location.href = '/dashboard';
     } catch (error: any) {
       console.error('Login failed:', error);
-      enqueueSnackbar(error.response.data.detail || "Falha ao realizar o login", {
+      enqueueSnackbar(error.response.data.detail || 'Falha ao realizar o login', {
         variant: 'error',
         autoHideDuration: 3000,
         anchorOrigin: {
@@ -77,6 +79,10 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
     }
   };
 
+  const register = async (email: string, password: string, firstName: string, lastName: string) => {
+    // todo: this flow need to be recode as it not verified
+  };
+
   return (
     <JWTContext.Provider
       value={{
@@ -84,6 +90,8 @@ export const JWTProvider = ({ children }: { children: React.ReactElement }) => {
         user,
         login,
         logout,
+        resetPassword,
+        register
       }}
     >
       {children}

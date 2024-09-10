@@ -78,12 +78,3 @@ export type JWTContextType = {
   login: (email: string, password: string) => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
 };
-
-export type Auth0ContextType = {
-  isLoggedIn: boolean;
-  isInitialized?: boolean;
-  user?: UserProfile | null | undefined;
-  logout: () => void;
-  login: () => void;
-  resetPassword: (email: string) => Promise<void>;
-};
