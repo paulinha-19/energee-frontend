@@ -29,6 +29,8 @@ export default function DashboardDefault() {
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
   const [selectedDistribuidora, setSelectedDistribuidora] = useState<string | null>(null);
   const [selectedReferencia, setSelectedReferencia] = useState<string | null>(null);
+  const [filterActive, setFilterActive] = useState<boolean>(false);
+
   const page = 0;
   const rowsPerPage = 10;
 
@@ -55,26 +57,33 @@ export default function DashboardDefault() {
   const productionDataAdminQuery = useQuery({
     queryKey: ['data-chart-production-admin', selectedDistribuidora, selectedReferencia],
     queryFn: () => getChartProductionDataAdmin(selectedReferencia, selectedClient, selectedDistribuidora),
-    enabled: user?.role === 'AD'
+    enabled: filterActive && user?.role === 'AD' && !!selectedDistribuidora && !!selectedReferencia // Ativar somente após clicar em "Filtrar"
   });
 
   const productionDataClientQuery = useQuery({
     queryKey: ['data-chart-production-client', selectedDistribuidora, selectedReferencia],
     queryFn: () => getChartProductionData(selectedDistribuidora, selectedReferencia),
-    enabled: user?.role !== 'AD'
+    enabled: filterActive && user?.role !== 'AD' && !!selectedDistribuidora && !!selectedReferencia
   });
 
   // Separate queries for Admin and Client roles for financial data
   const financialDataAdminQuery = useQuery({
     queryKey: ['data-chart-financial-admin', selectedDistribuidora, selectedReferencia],
     queryFn: () => getChartFinancialDataAdmin(selectedReferencia, selectedClient, selectedDistribuidora),
-    enabled: user?.role === 'AD'
+    enabled: filterActive && user?.role === 'AD' && !!selectedDistribuidora && !!selectedReferencia
   });
 
   const financialDataClientQuery = useQuery({
     queryKey: ['data-chart-financial-client', selectedDistribuidora, selectedReferencia],
     queryFn: () => getChartFinancialData(selectedDistribuidora, selectedReferencia),
-    enabled: user?.role !== 'AD'
+    enabled: filterActive && user?.role !== 'AD' && !!selectedDistribuidora && !!selectedReferencia
+  });
+
+  // Query para obter os dados do dashboard
+  const {data: dataInfoDashboard} = useQuery({
+    queryKey: ['info-dashboard', selectedReferencia, selectedClient, selectedDistribuidora],
+    queryFn: () => getInfoDashboard(selectedReferencia, selectedClient, selectedDistribuidora),
+    enabled: filterActive && !!selectedReferencia && !!selectedClient && !!selectedDistribuidora // Habilita apenas quando o filtro é ativado
   });
 
   const handleFilter = () => {
@@ -82,6 +91,8 @@ export default function DashboardDefault() {
       alert('Todos os campos são obrigatórios!');
       return;
     }
+    // Ativar o filtro e habilitar as requisições dos gráficos
+    setFilterActive(true);
     queryClient.invalidateQueries({ queryKey: ['data-chart-production-admin'] });
     queryClient.invalidateQueries({ queryKey: ['data-chart-production-client'] });
     queryClient.invalidateQueries({ queryKey: ['data-chart-financial-admin'] });
@@ -89,6 +100,7 @@ export default function DashboardDefault() {
     queryClient.invalidateQueries({ queryKey: ['info-dashboard'] });
   };
 
+  console.log("infoDashboardQuery.data:", dataInfoDashboard);
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
       <Grid item xs={12}>
