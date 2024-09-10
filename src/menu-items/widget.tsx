@@ -2,7 +2,7 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { Story, Fatrows, PresentionChart, People, Activity } from 'iconsax-react';
+import { Story, Fatrows, PresentionChart, People, Activity, Document, Data2 } from 'iconsax-react';
 
 // type
 import { NavItemType } from 'types/menu';
@@ -14,7 +14,9 @@ const icons = {
   data: Fatrows,
   chart: PresentionChart,
   people: People,
-  unity: Activity
+  unity: Activity,
+  reports: Document,
+  extraction: Data2
 };
 
 // ==============================|| MENU ITEMS - WIDGETS ||============================== //
@@ -63,6 +65,22 @@ const widget: NavItemType = {
       type: 'item',
       url: '/unidades-consumidoras',
       icon: icons.unity,
+      breadcrumbs: false
+    },
+    // {
+    //   id: 'relatorios',
+    //   title: <FormattedMessage id="Relatórios" />,
+    //   type: 'item',
+    //   url: '/relatorios/relatorios-tipos',
+    //   icon: icons.reports,
+    //   breadcrumbs: false
+    // }
+    {
+      id: 'extracao',
+      title: <FormattedMessage id="Extração" />,
+      type: 'item',
+      url: '/extracao',
+      icon: icons.extraction,
       breadcrumbs: false
     }
   ]

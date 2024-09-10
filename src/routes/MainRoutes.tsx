@@ -20,6 +20,8 @@ const Distribuidoras = Loadable(lazy(() => import('pages/distribuidoras/index'))
 const Generator = Loadable(lazy(() => import('pages/geradores/index')));
 const Plants = Loadable(lazy(() => import('pages/usinas/index')));
 const ConsumerUnit = Loadable(lazy(() => import('pages/unidade-consumidora/index')));
+const Reports = Loadable(lazy(() => import('pages/reports/index')));
+const Extraction = Loadable(lazy(() => import('pages/extraction/index')));
 
 // render - widget
 const WidgetStatistics = Loadable(lazy(() => import('pages/widget/statistics')));
@@ -184,9 +186,26 @@ const MainRoutes = {
             {
               path: 'unidades-consumidoras',
               element: <ConsumerUnit />
+            },
+            {
+              path: 'extracao',
+              element: <Extraction />
             }
+            // {
+            //   path: 'relatorios',
+            //   children: [
+            //     {
+            //       path: '/relatorios-tipos',
+            //       element: <Reports />
+            //     },
+            //     {
+            //       path: '/',
+            //       element: <Reports />
+            //     }
+            //   ]
+            // },
           ]
-        },
+        }
         // {
         //   path: 'widget',
         //   children: [
@@ -359,7 +378,6 @@ const MainRoutes = {
         //   ]
         // },
 
-
         // {
         //   path: 'forms',
         //   children: [
@@ -419,7 +437,6 @@ const MainRoutes = {
         //     }
         //   ]
         // },
-
 
         // {
         //   path: 'tables',
@@ -543,7 +560,6 @@ const MainRoutes = {
         //   ]
         // },
 
-
         // {
         //   path: 'map',
         //   element: <Map />
@@ -579,7 +595,6 @@ const MainRoutes = {
     //   ]
     // },
 
-
     // {
     //   path: '/',
     //   element: <SimpleLayout layout={SimpleLayoutType.SIMPLE} />,
@@ -590,7 +605,6 @@ const MainRoutes = {
     //     }
     //   ]
     // },
-
 
     {
       path: '/maintenance',
@@ -622,7 +636,6 @@ const MainRoutes = {
         }
       ]
     },
-
 
     // {
     //   path: '/auth',
